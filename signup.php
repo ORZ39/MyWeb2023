@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+ // Connect to database
+    $conn = new mysqli("mywebserver2023.mysql.database.azure.com", "orz1920", "R.o.123456789", "mydatabase");
+
+    // Check connection
+    if($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
 if(isset($_SESSION['username'])) {
     // User already logged in
     header("Location: dashboard.php");
@@ -12,13 +20,7 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Connect to database
-    $conn = new mysqli("mywebserver2023.mysql.database.azure.com", "orz1920", "R.o.123456789", "mydatabase");
-
-    // Check connection
-    if($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+   
 
     // Query database for user
     $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
