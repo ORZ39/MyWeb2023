@@ -1,43 +1,36 @@
 <?php
 session_start();
 
- // Connect to database
-    $conn = new mysqli("mywebserver2023.mysql.database.azure.com", "orz1920", "R.o.123456789", "mydatabase");
-
-    // Check connection
-    if($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
 if(isset($_SESSION['username'])) {
     // User already logged in
     header("Location: dashboard.php");
     exit();
 }
 
-if(isset($_POST['username']) && isset($_POST['password'])) {
-    // Form submitted, try to log in
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    require_once('database.php');
 
-   
-    // Query database for user
-    $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-    $result = $conn->query($query);
+    $conn = connect_to_db();
 
-    if($result->num_rows > 0) {
-        // User found, log them in
-        $_SESSION['username'] = $username;
-        header("Location: dashboard.php");
-        exit();
-    } else {
-        // Invalid username/password
-        $error = "Invalid username or password.";
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+
+    $query = "SELECT * FROM users WHERE username = '$username'";
+    $result = mysqli_query($conn, $query);
+
+    if(mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+
+        if(password_verify($password, $row['password'])) {
+            $_SESSION['username'] = $username;
+            header("Location: dashboard.php");
+            exit();
+        }
     }
 
-    // Close connection
-    $conn->close();
+    $error_message = "Invalid username or password.";
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -48,19 +41,21 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 </head>
 <body>
     <div class="container">
-        <div class="form">
-            <h2>Login</h2>
-            <?php if(isset($error)) { ?>
-                <p class="error"><?php echo $error; ?></p>
-            <?php } ?>
-            <form method="post">
-                <label for="username">Username:</label>
-                <input type="text" name="username" required>
-                <label for="password">Password:</label>
-                <input type="password" name="password" required>
-                <input type="submit" value="Login">
-            </form>
-        </div>
+        <h2>Login</h2>
+        <?php
+            if(isset($error_message)) {
+                echo '<div class="error">' . $error_message . '</div>';
+            }
+        ?>
+        <form method="post">
+            <label>Username:</label>
+            <input type="text" name="username" required>
+            <br>
+            <label>Password:</label>
+            <input type="password" name="password" required>
+            <br>
+            <button type="submit">Login</button>
+        </form>
     </div>
 </body>
 </html>
