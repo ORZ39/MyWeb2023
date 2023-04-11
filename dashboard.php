@@ -8,6 +8,7 @@ if(!isset($_SESSION['username'])) {
 }
 
 $username = $_SESSION['username'];
+
 ?>
 
 <!DOCTYPE html>
@@ -18,9 +19,10 @@ $username = $_SESSION['username'];
 </head>
 <body>
     <div class="container">
-        <h2>Welcome, <?php echo $username; ?></h2>
-        <p>Your dashboard content goes here.</p>
-        <a href="logout.php">Logout</a>
+        <h2>Welcome, <?php echo $_SESSION['username']; ?>!</h2>
+        <form method="post" action="logout.php">
+            <button type="submit">Logout</button>
+        </form>
     </div>
 </body>
 </html>
