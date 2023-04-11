@@ -1,34 +1,130 @@
+/* Style for all pages */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
 .container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid #ddd;
 }
-.form {
-	background-color: #f1f1f1;
-	padding: 20px;
-	border-radius: 10px;
-	margin: 20px;
-}
+
 form {
-	display: flex;
-	flex-direction: column;
+    display: inline-block;
 }
+
 label {
-	font-weight: bold;
-	margin-bottom: 5px;
+    display: inline-block;
+    width: 100px;
+    margin-bottom: 10px;
 }
-input[type="text"], input[type="password"], input[type="submit"] {
-	padding: 10px;
-	margin-bottom: 10px;
-	border-radius: 5px;
-	border: none;
+
+input[type="text"],
+input[type="password"] {
+    padding: 5px;
+    width: 200px;
+    margin-bottom: 10px;
 }
-input[type="submit"] {
-	background-color: #4CAF50;
-	color: white;
-	cursor: pointer;
+
+.error {
+    color: red;
 }
-input[type="submit"]:hover {
-	background-color: #3e8e41;
+
+/* Style for index.php and login.php */
+.logo {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0069d9;
+}
+
+/* Style for dashboard.php */
+.dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.dashboard h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logout {
+    text-align: right;
+}
+
+.logout a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.logout a:hover {
+    text-decoration: underline;
+}
+
+/* Style for signup.php */
+.signup {
+    text-align: center;
+}
+
+.signup h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.signup p {
+    margin-bottom: 20px;
+}
+
+.signup form {
+    margin: 0 auto;
+}
+
+.signup label {
+    display: block;
+    text-align: left;
+}
+
+.signup input[type="submit"] {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.signup input[type="submit"]:hover {
+    background-color: #0069d9;
+}
+
+.signup .error {
+    color: red;
 }
