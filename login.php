@@ -33,29 +33,3 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h2>Login</h2>
-        <?php
-            if(isset($error_message)) {
-                echo '<div class="error">' . $error_message . '</div>';
-            }
-        ?>
-        <form method="post">
-            <label>Username:</label>
-            <input type="text" name="username" required>
-            <br>
-            <label>Password:</label>
-            <input type="password" name="password" required>
-            <br>
-            <button type="submit">Login</button>
-        </form>
-    </div>
-</body>
-</html>
